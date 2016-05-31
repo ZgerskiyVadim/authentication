@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html ng-app=myApp>
+<head>
+	<meta charset="UTF-8">
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<title>Contact List App</title>
+</head>
+<body>
+	<div class="container" ng-app="showApp" ng-controller="AppCtrl">
+		<h1>Contact List App</h1>
+        <form ng-show="loginout" class="col-md-2">
+            <button class="btn btn-primary" ng-click="logout()">Log out</button>
+        </form>
+        <form ng-show="loginstration" class="form-inline">
+            <button class="btn btn-primary" ng-click="login()">login</button>
+            <button class="btn btn-primary" ng-click="registration()">registration</button>
+        </form>
+        <div class="container">
+            <form ng-show="showRegistration" class="form-horizontal">
+                <div class="form-horizontal col-md-5">
+                    <br>
+                    <label>Name</label>
+                    <input class="form-control" ng-model="contact.name" pattern="[A-Za-z].{3,}" required>
+                    <br>
+                    <label>Email</label>
+                    <input type="email" class="form-control" ng-model="contact.email" required>
+                    <br>
+                    <label>Password</label>
+                    <input type="password" class="form-control" ng-model="contact.password" pattern=".{3,}" required>
+                    <br>
+                    <label>Number</label>
+                    <input class="form-control" ng-model="contact.number" pattern="[0-9]{3,10}" required>
+                    <br>
+                    <button class="btn btn-primary" ng-click="addContact()">Add Contact</button>
+                    <button class="btn btn-info" ng-click="deselect()">Clear</button>
+                </div>
+            </form>
+            <form ng-show="showLoginIn" class="form-horizontal">
+                <div class="form-horizontal col-md-5">
+                    <br>
+                   <label>Name</label>
+                   <input class="form-control" ng-model="contact.name">
+                    <br>
+                   <label>Password</label>
+                   <input type="password" class="form-control" ng-model="contact.password">
+                   <br>
+                   <button class="btn btn-primary" ng-click="enterLogin()">Enter</button>
+                </div>
+            </form>
+            <table class="table" ng-show="iminside">
+                <br>
+                <tr>
+                    <thead>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Number</th>
+                        <th>Password</th>
+                    </thead>
+                </tr>
+                <tbody>
+                    <tr>
+                        <td><form class="form-inline">
+                                <div class="form-group">
+                                    <input class="form-control" ng-model="contact.name">
+                                </div></td>
+                        <td><div class="form-group">
+                                <input class="form-control" ng-model="contact.email">
+                            </div></td>
+                        <td><div class="form-group">
+                                <input class="form-control" ng-model="contact.number">
+                            </div></td>
+                        <td><div class="form-group">
+                                <input class="form-control" ng-model="contact.password">
+                            </div></td>
+                            </form>
+                    </tr>
+                        <tr ng-repeat="contact in contactlist">
+                            <td>{{contact.name}}</td>
+                            <td>{{contact.email}}</td>
+                            <td>{{contact.number}}</td>
+                            <td>{{contact.password}}</td>
+                            <td><button class="btn btn-danger" ng-click="remove (contact._id)">Remove</button></td>
+                            <td><button class="btn btn-warning" ng-click="edit(contact._id)">Edit</button> </td>
+                            <td><button class="btn btn-info" ng-click="update()">Save changes</button>&nbsp;&nbsp;</td>
+                        </tr>
+                </tbody>
+            </table>
+	</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"> </script>
+<script src="controllers/controller.js"></script>
+</body>
+</html>
